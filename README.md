@@ -1,2 +1,2 @@
 # iGarym.github.io
-Gary's page
+Welcome to my page
