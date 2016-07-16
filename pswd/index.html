@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
     <title>My Password</title>
+    <link href="https://fonts.useso.com/css?family=Pattaya&text=passwordPWSSWORD" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Pattaya&text=passwordPWSSWORD" rel="stylesheet"> -->
     <style type="text/css" media="screen">
     	* {padding: 0;margin: 0;box-sizing: border-box;}
     	section {
@@ -16,17 +18,57 @@
     	div.content {
     		padding-top: 10vh;
     	}
+    	h1 {
+    		font-family: 'Pattaya', sans-serif;
+    		font-size: 38px;
+    	}
+    	#g-text {
+    		margin-top: 5vh;
+    	}
+    	#g-text input {
+    		width: 50vw;
+    		min-width: 140px;
+    		max-width: 360px;
+    		height: 42px;
+    		padding: 10px;
+    		border-radius: 4px;
+    		border: 1px solid #dcdcdc;
+    		font-size: 20px;
+    		color: #d1f3fa;
+    		letter-spacing: 1px;
+    	}
+    	#g-text input:focus {
+    		outline: #f87f16;
+    		border: 1px solid #f87f16;
+    	}
+    	#g-text button {
+    		width: 20vw;
+    		max-width: 80px;
+    		height: 42px;
+    		margin-left: 20px;
+    		border: none;
+    		border-radius: 4px;
+    		vertical-align: bottom;
+    		background: #30C9D2;
+    		color: #fff;
+    		font-size: 20px;
+    	}
+    	#g-text button:focus {
+    		background-color: #30C9D2;
+    		border: none;
+    		outline: none;
+    	}
     </style>
 </head>
 <body>
 	<section>
 		<div class="content">
 			<h1>PASSWORD</h1>
-    		<div>
+    		<div id="g-text">
     			<input type="text">
+    			<button>GO</button>
     		</div>
-    		<button>GO</button>
-    		<p></p>
+    		<p>这里显示计算结果</p>
     	</div>
 	</section>
     <script src="/src/js/md5.min.js" type="text/javascript" charset="utf-8"></script>
