@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
     <title>My Password</title>
-    <link href="https://fonts.useso.com/css?family=Pattaya&text=passwordPWSSWORD" rel="stylesheet">
-    <!-- <link href="https://fonts.googleapis.com/css?family=Pattaya&text=passwordPWSSWORD" rel="stylesheet"> -->
+    <link href="http://fonts.useso.com/css?family=Pattaya&text=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Pattaya&text=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" rel="stylesheet"> -->
     <style type="text/css" media="screen">
     	* {padding: 0;margin: 0;box-sizing: border-box;}
     	section {
@@ -19,11 +19,15 @@
     		padding-top: 10vh;
     	}
     	h1 {
+    		margin-bottom: 6vh;
     		font-family: 'Pattaya', sans-serif;
     		font-size: 38px;
     	}
+    	label input {
+    		display: none;
+    	}
     	#g-text {
-    		margin-top: 5vh;
+    		/* margin-top: 5vh; */
     	}
     	#g-text input {
     		width: 50vw;
@@ -38,8 +42,8 @@
     		letter-spacing: 1px;
     	}
     	#g-text input:focus {
-    		outline: #f87f16;
-    		border: 1px solid #f87f16;
+    		outline: none;
+    		border: 1px solid #30C9D2;
     	}
     	#g-text button {
     		width: 20vw;
@@ -58,12 +62,29 @@
     		border: none;
     		outline: none;
     	}
+    	#g-text + p {
+    		display: inline-block;
+    		width: 60vw;
+    		min-width: 200px;
+    		max-width: 400px;
+    		height: 36px;
+    		margin-top: 8vh;
+    		border-radius: 4px;
+    		border: 1px solid #d1f3fa;
+    		line-height: 36px;
+    		font-size: 18px;
+    		background: #d1f3fa;
+    		color: #30C9D2;
+    		cursor: not-allowed;
+    	}
     </style>
 </head>
 <body>
 	<section>
 		<div class="content">
 			<h1>PASSWORD</h1>
+			<label for="radio1"><input id="radio1" type="radio" name="radio" value="1"></label>
+			<label for="radio2"><input id="radio2" type="radio" name="radio" value="2"></label>
     		<div id="g-text">
     			<input type="text">
     			<button>GO</button>
