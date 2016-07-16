@@ -5,11 +5,30 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
     <title>My Password</title>
+    <style type="text/css" media="screen">
+    	* {padding: 0;margin: 0;box-sizing: border-box;}
+    	section {
+    		height: 100vh;
+    		min-height: 400px;
+    		min-width: 300px;
+    		text-align: center;
+    	}
+    	div.content {
+    		padding-top: 10vh;
+    	}
+    </style>
 </head>
 <body>
-    <input type="text">
-    <br>
-    <p></p>
+	<section>
+		<div class="content">
+			<h1>PASSWORD</h1>
+    		<div>
+    			<input type="text">
+    		</div>
+    		<button>GO</button>
+    		<p></p>
+    	</div>
+	</section>
     <script src="/src/js/md5.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/src/js/pswd.js" type="text/javascript" charset="utf-8"></script>
 </body>
