@@ -3,10 +3,12 @@ fis.match('(*.{png,gif,jpg})', {release: '/src/images/$1$2$3'});
 fis.match('/src/js/(*.{js,jsx})', { release: '/src/js/$1$2' });
 fis.match('/src/css/(*.{css,less})', { release: '/src/css/$1$2'});
 fis.match('/src/fonts/(*.{ttf,woff})', { release: '/src/fonts/$1$2'});
-fis.match('/views/**.html',{release: '/$0'});
+//fis.match('/views/**.html',{release: '/$0'});
 fis.match('index.html',{release: '/$0'});
 /*fis.match('/test/*.json', {release: '$0'});
 fis.match('/test/*.conf', {release: '/config/server.conf'});*/
+
+
 //加MD5
 fis.match('*.{js,css,png,jpg,gif,jpeg}', {
     useHash: false
@@ -19,15 +21,24 @@ fis.match('*.{js,css,png,jpg,gif,jpeg}', {
     rExt: '.css'
 })*/
 
+fis.set('new date', Date.now());
+
+fis.match('*.jpg', {
+    query: '?=t' + fis.get('new date')
+});
+
 //压缩资源
 fis.match('*.png', {
-    optimizer: fis.plugin('png-compressor')
+    optimizer: fis.plugin('png-compressor'),
+    query: '?=t' + fis.get('new date')
 });
 fis.match('*.js', {
-    optimizer: fis.plugin('uglify-js')
+    optimizer: fis.plugin('uglify-js'),
+    query: '?=t' + fis.get('new date')
 });
 fis.match('*.css', {
-    optimizer: fis.plugin('clean-css')
+    optimizer: fis.plugin('clean-css'),
+    query: '?=t' + fis.get('new date')
 })
 
 //图片合并
