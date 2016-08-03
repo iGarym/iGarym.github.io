@@ -5,7 +5,7 @@
     var resultNode = document.querySelector('.p-main p');
     var radioVal = document.querySelector('input:checked').value;
     btn.addEventListener('click', function(e) {
-        var _typeVal = document.querySelector('input[type=radio]:checked');
+        var _typeVal = document.querySelector('input[type=radio]:checked').value();
         var _val = md5(input.value);
         var _tmp = _val.replace(/\d{2,}/g, function(e) {
             return Number(e).toString(16)
