@@ -4,8 +4,10 @@
     var btn = document.querySelector('.p-main button');
     var resultNode = document.querySelector('.p-main p');
     btn.addEventListener('click', function(e) {
-        var _val = md5(input.value);
-        var _tmp = _val.replace(/\d{2,}/g, function(e) {
+        var _val = input.value.replace(/[a-z]/g, function(e) {
+        		return e.toLocaleUpperCase();
+        });
+        var _tmp = md5(_val).replace(/\d{2,}/g, function(e) {
             return Number(e).toString(16)
         });
         var _typeVal = document.querySelector('input[type=radio]:checked').value;
