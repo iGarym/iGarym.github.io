@@ -2,12 +2,15 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <title>来自Gary的祝福</title>
   <style>
-    body {
+    html, body {
       width: 100%;
       height: 100%;
       position: relative;
+      margin: 0;
+      padding: 0;
       background-color: #fff;
       text-align: center;
       font-size: 16px;
@@ -22,19 +25,22 @@
       top: 55%;
       color: #fff;
     }
-    p.show {
-      color: #f33;
-    }
   </style>
-  <script>
-    document.documentElement.ondblclick = function() {
-      var p = document.getElementById('pswd');
-      p.classList.toggle('show')
-    }
-  </script>
 </head>
 <body>
   <p>猜一猜红包口令在哪里</p>
   <p id="pswd">来自Gary的祝福</p>
+  <script>
+    var index = 0;
+    document.documentElement.onclick = function() {
+      var p = document.getElementById('pswd');
+      if (!index) {
+        p.style.color = ['#', 'F', 'F', 'F'].join()
+      } else {
+        p.style.color = ['#', 'F', index, 'F', index, 'F', index].join()
+      }
+      index = (index + 1)%10;
+    }
+  </script>
 </body>
 </html>
