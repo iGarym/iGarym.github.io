@@ -34,11 +34,7 @@
     var index = 0;
     var p = document.getElementById('pswd');
     document.documentElement.onclick = function() {
-      if (!index) {
-        p.style.color = ['#', 'F', 'F', 'F'].join()
-      } else {
-        p.style.color = ['rgb(', 255 - index*6, ',', 255 - index*6, ',', 255 - index*6, ')'].join('')
-      }
+      p.style.color = ['rgb(', 255 - index*6, ',', 255 - index*6, ',', 255 - index*6, ')'].join('')
       index = (index + 1)%10;
     }
   </script>
