@@ -32,8 +32,9 @@
   <p id="pswd">来自Gary的祝福</p>
   <script>
     var index = 0;
+    var p = document.getElementById('pswd');
     document.documentElement.onclick = function() {
-      var p = document.getElementById('pswd');
+      console.log(index);
       if (!index) {
         p.style.color = ['#', 'F', 'F', 'F'].join()
       } else {
