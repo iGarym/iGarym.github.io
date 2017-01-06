@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>来自Gary的祝福</title>
+  <style>
+    body {
+      position: relative;
+      background-color: #fff;
+      text-align: center;
+      font-size: 16px;
+    }
+    p {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 45%;
+    }
+    p:nth-child(2) {
+      top: 55%;
+      color: #fff;
+    }
+    p.show {
+      color: #f33;
+    }
+  </style>
+  <script>
+    document.documentElement.ondblclick = function() {
+      var p = document.getElementById('pswd');
+      p.classList.toggle('show')
+    }
+  </script>
+</head>
+<body>
+  <p>猜一猜红包口令在哪里</p>
+  <p id="pswd">来自Gary的祝福</p>
+</body>
+</html>
