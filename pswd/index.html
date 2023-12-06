@@ -5,34 +5,135 @@
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
-    <title>My Password</title>
-    <!-- <link href="http://fonts.useso.com/css?family=Pattaya&text=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" rel="stylesheet"> -->
-    <link href="https://fonts.googleapis.com/css?family=Pattaya&text=abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/src/css/pswd.css?=t1473610016070">
+    <style>
+        @keyframes slide-top {
+          0% {
+            transform: translateY(-100%);
+            opacity: 0;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+      
+        .slide-top {
+          animation: slide-top 0.5s ease forwards;
+        }
+    </style>      
+    <title>☺️</title>
 </head>
 
-<body>
-    <div class="page">
-        <section class="p-title">
-            <h1>PASSWORD</h1>
+<body class="h-screen w-screen flex items-center justify-center bg-slate-800">
+    <div class="flex flex-col gap-4 p-4 rounded bg-slate-700 shadow text-slate-400">
+        <section class="flex gap-4 justify-center">
+            <label for="radio1" class="cursor-pointer">
+                <input id="radio1" type="radio" name="version" value="1" checked>
+                旧版
+            </label>
+            <label for="radio2" class="cursor-pointer">
+                <input id="radio2" type="radio" name="version" value="2">
+                新版
+            </label>
         </section>
-        <section class="p-menu">
-            <input id="radio1" type="radio" name="radio" value="0" checked>
-            <label for="radio1">none</label>
-            <input id="radio2" type="radio" name="radio" value="1">
-            <label for="radio2">sample</label>
-            <input id="radio3" type="radio" name="radio" value="2">
-            <label for="radio3">complex</label>
-        </section>
-        <section class="p-main">
-            <div id="g-text">
-                <input type="text"><button>GO</button>
-            </div>
-            <p></p>
-        </section>
+        <input class="rounded p-2" type="text">
+        <button class="p-2 rounded bg-slate-800">GO</button>
     </div>
-    <script src="/src/js/md5.min.js?=t1473610016070" type="text/javascript" charset="utf-8"></script>
-    <script src="/src/js/pswd.js?=t1473610016070" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        const sucIcon = `<svg class="flex-shrink-0 h-4 w-4 text-teal-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+      </svg>`;
+      const errIcon = `<svg class="flex-shrink-0 h-4 w-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+      </svg>`;
+        function toast(icon, text) {
+            const dom = `<div class="max-w-xs bg-white border border-gray-200 rounded-xl shadow-lg dark:bg-gray-800 dark:border-gray-700" role="alert">
+                <div class="flex p-4">
+                    <div class="flex-shrink-0">
+                    ${icon}
+                    </div>
+                    <div class="ms-3">
+                    <p class="text-sm text-gray-700 dark:text-gray-400">
+                        ${text}
+                    </p>
+                    </div>
+                </div>
+            </div>`;
+            const $dom = document.createElement('div');
+            $dom.classList.add('fixed', 'top-6');
+            $dom.innerHTML = dom;
+            document.body.appendChild($dom);
+            $dom.classList.add('slide-top');
+            setTimeout(() => {
+                $dom.remove();
+            }, 2000);
+        }
+        window.__TOAST__ = {
+            success(text) {
+                return toast(sucIcon, text);
+            },
+            error(text) {
+                return toast(errIcon, text);
+            },
+        };
+    </script>
+    <script>
+        const $input = document.querySelector('input[type=text]');
+        const $btn = document.querySelector('button');
+
+        async function handler() {
+            const val = $input.value.trim();
+            if (!val) {
+                return;
+            }
+            const version = +document.querySelector('input[type=radio]:checked').value;
+            try {
+                const value = await generate(val.toLocaleUpperCase(), version);
+                await navigator.clipboard.writeText(value);
+                window.__TOAST__.success('复制成功');
+            } catch (error) {
+                window.__TOAST__.error(error.message);
+            }
+        }
+
+        async function generate(str, ver) {
+            if (ver === 1) {
+                return CryptoJS
+                    .MD5(str)
+                    .toString()
+                    .replace(/\d{2,}/g, (e) => Number(e).toString(16))
+                    .substr(-12);
+            } else if (ver === 2) {
+                const encoder = new TextEncoder();
+                const hash = await crypto.subtle.digest('SHA-512', encoder.encode(str));
+                const hashHex = Array.from(new Uint8Array(hash)).map(b => b.toString(32).padStart(2, '0')).join('');
+
+                let result = '';
+                let hasUpperCase = false;
+                let hasLowerCase = false;
+                let hasNumber = false;
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                for (let i = 0; result.length < 8; i++) {
+                    const char = hashHex[(i % hashHex.length)];
+                    const index = parseInt(char, 32) * (i + 1);
+                    result += chars[index % chars.length];
+                }
+                return result;
+            } else {
+                window.__TOAST__.error('版本错误');
+            }
+        }
+
+        $btn.addEventListener('click', handler, false);
+        $input.addEventListener('keydown', function(evt) {
+            if (evt.key === 'Enter') {
+                $input.blur();
+                handler();
+            }
+        }, false);
+    </script>
 </body>
 
 </html>
